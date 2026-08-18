@@ -4,7 +4,7 @@ type: GOVERNANCE
 authority_scope: project.status
 canonical: true
 owner: governance-team
-last_reviewed: 2026-08-18
+last_reviewed: 2026-08-19
 ---
 
 # Project Status — Lentera Pudar
@@ -28,9 +28,10 @@ last_reviewed: 2026-08-18
   - R4-C Roadmap Continuity Correction: `ACCEPTED`; this bounded governance-only correction restores the required post-R4 roadmap order.
   - R5 Legacy Contamination & Cross-Domain Consistency Audit: `ACCEPTED`; final read-only re-audit passed after bounded R5-A, R5-B, and R5-C corrections.
   - R6 Fresh Repository Genesis Preparation: `ACCEPTED`; canonical genesis manifest, safety boundary, execution procedure, and R8 verification contract are recorded in `references/00-governance/repository-genesis-plan.md`.
-  - R7 Fresh `lentera-pudar` Repository Genesis: `IMPLEMENTED`; `PENDING R8 VERIFICATION`.
-  - R8 Migration Verification & Legacy Repository Retirement Gate: `NOT_STARTED`; `NEXT` substantive gate.
-  - H1 Unreal Pipeline Readiness Audit: `BLOCKED`; it must not start until R8 is externally accepted.
+  - R7 Fresh `lentera-pudar` Repository Genesis: `ACCEPTED`; fresh repository genesis was independently verified through the accepted R8 migration-verification gate.
+  - R8 Migration Verification & Legacy Repository Retirement Gate: `ACCEPTED`; fresh repository identity, history, manifest, governance, backup, and legacy recoverability were independently verified.
+  - Legacy repository preservation: `adityaairlangga12/lentera-pudar-legacy-pre-r7` remains preserved; retirement, archive, or deletion has `NOT BEEN AUTHORIZED` and still requires separate explicit Project Owner approval.
+  - H1 Unreal Pipeline Readiness Audit: `NOT_STARTED`; `NEXT` substantive gate.
   - R4-C does not constitute execution or acceptance of R5–R8.
 - **Blocker Registry**:
   - H1 cannot verify Unreal runtime architecture until an Unreal project and selected engine version are available for inspection.
