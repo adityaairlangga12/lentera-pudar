@@ -1,0 +1,19 @@
+{
+  "_templateStatus": "DOCUMENTED_ONLY_NOT_RUNTIME_PROOF",
+  "mcpServers": {
+    "lentera-blender": {
+      "command": "node",
+      "args": ["<ABSOLUTE_PATH_TO_LENTERA_BLENDER_MCP>/build/index.js"],
+      "env": {
+        "BLENDER_PATH": "<ABSOLUTE_PATH_TO_BLENDER_5_2_EXECUTABLE>",
+        "LENTERA_PROJECT_PATH": "<ABSOLUTE_PATH_TO_LENTERA_PUDAR>"
+      }
+    }
+  },
+  "plannedServers": {
+    "lentera-ue5": {
+      "status": "NOT_STARTED_UNAVAILABLE_PLANNED",
+      "comment": "Jangan tambahkan sebagai mcpServers sebelum Unreal project, server, endpoint, dan tool registration diverifikasi."
+    }
+  }
+}

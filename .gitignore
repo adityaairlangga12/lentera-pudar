@@ -1,0 +1,38 @@
+# ===================================================
+# Lentera Pudar — .gitignore
+# Engine: Unreal Engine 5 + Blender 5.2 LTS
+# ===================================================
+
+# --- Unreal Engine 5 ---
+Saved/
+Intermediate/
+DerivedDataCache/
+Binaries/
+Build/
+*.VC.db
+*.VC.opendb
+*.sln
+*.vcxproj
+*.vcxproj.filters
+.vs/
+
+# --- Blender ---
+*.blend1
+*.blend2
+__pycache__/
+*.pyc
+
+# --- OS & Editor ---
+.DS_Store
+.vscode/
+Thumbs.db
+desktop.ini
+.agents/mcp_config.local.json
+.agents/hooks.local.json
+.agents/mcp_config.json
+.agents/hooks.json
+
+# --- Binary source-control policy ---
+# Git LFS / binary source-control policy is NOT YET ESTABLISHED.
+# Production binary ingestion must wait for an approved policy.
+# Candidate asset types are intentionally not ignored here until that policy is approved.
