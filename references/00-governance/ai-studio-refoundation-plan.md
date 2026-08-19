@@ -4,7 +4,7 @@ type: GOVERNANCE
 authority_scope: program.ai_studio_refoundation
 canonical: true
 owner: governance-team
-last_reviewed: 2026-08-19
+last_reviewed: 2026-08-20
 ---
 
 # AI Game Dev Studio Architecture Refoundation Plan — Lentera Pudar
@@ -82,11 +82,11 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 - **Fokus & Lingkup**: Perumusan formal arsitektur semantik Studio OS, batas modularitas, spesifikasi kontrak data/skema, arsitektur isolasi multi-repository, dan penyusunan spesifikasi teknis pada [ai-studio-semantic-architecture.md](ai-studio-semantic-architecture.md) serta [ADR-042](adr/ADR-042-studio-semantic-and-repository-boundary.md) sebelum inisialisasi kode.
 
 ### AS2 — Studio OS Genesis, Contracts & Extension Foundation
-- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS1)
+- **Status Baseline**: `ACCEPTED`
 - **Fokus & Lingkup**: Inisialisasi repository mandiri Studio OS yang terisolasi, pembuatan paket fondasi kontrak, antarmuka ekstensi (*extension foundation*), dan struktur proyek inti berdasar persetujuan manusia atas nama dan lisensi repository.
 
 ### AS3 — Provider, Profile, Skill & Runtime Refoundation
-- **Status Baseline**: `NOT_STARTED`
+- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS2; eligible for bounded architecture/planning preparation only. AS3 implementation requires separate explicit Project Owner authorization.)
 - **Fokus & Lingkup**: Abstraksi layer multi-provider AI, spesifikasi profil agen peran teknis, isolasi runtime eksekusi, dan refoundasi mekanisme integrasi skill lokal.
 
 ### AS4 — Capability Registry & Control-Plane Integration
