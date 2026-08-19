@@ -35,8 +35,8 @@ last_reviewed: 2026-08-19
 - **AI Game Dev Studio Refoundation (AS) Program Status**:
   - AS0 — Current Architecture Audit: `ACCEPTED` (read-only audit and target-design closure; does not imply Studio OS implementation).
   - AS-G0 — Governance Activation: `ACCEPTED` (canonical AS roadmap, phase boundaries, and H1 deferral recorded in [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md); independently reviewed, merged, and post-merge verified).
-  - AS1 — Studio Semantic Architecture & Repository Boundary: `IMPLEMENTED / PENDING EXTERNAL REVIEW` (canonical semantic entity model, invariants, and repository ownership boundaries defined in [ai-studio-semantic-architecture.md](ai-studio-semantic-architecture.md) and [ADR-042](adr/ADR-042-studio-semantic-and-repository-boundary.md)).
-  - AS2 — Studio OS Genesis, Contracts & Extension Foundation: `NOT_STARTED` (blocked until AS1 is externally accepted).
+  - AS1 — Studio Semantic Architecture & Repository Boundary: `ACCEPTED` (canonical semantic entity model, invariants, repository ownership boundaries, and ADR-042 merged and independently verified).
+  - AS2 — Studio OS Genesis, Contracts & Extension Foundation: `NOT_STARTED; NEXT governance gate` (eligible for foundation planning; physical repository creation remains gated by Project Owner authorization).
   - AS3 — Provider, Profile, Skill & Runtime Refoundation: `NOT_STARTED`.
   - AS4 — Capability Registry & Control-Plane Integration: `NOT_STARTED`.
   - AS5 — Lentera Pudar Integration & Production Lifecycle: `NOT_STARTED`.
