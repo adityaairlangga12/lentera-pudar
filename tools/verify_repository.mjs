@@ -8,7 +8,7 @@ import { fileURLToPath } from "node:url";
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const gitSafeRoot = root.replaceAll("\\", "/");
 const markdownLink = /\[[^\]]+\]\(([^)]+)\)/g;
-const retiredAdr = /\bADR-(?:00[5-9]|0[1-9][0-9]|[1-9][0-9]{2,})\b/g;
+const retiredAdr = /\bADR-(?:00[5-9]|0[1-3][0-9]|04[01])\b/g;
 const retiredPaths = [
   "references/01-core/master-index.md",
   "references/01-core/design-decisions.md",
