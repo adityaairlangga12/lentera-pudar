@@ -91,7 +91,7 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 
 ### AS4 — Capability Registry & Control-Plane Integration
 - **Status Baseline**: `NOT_STARTED`
-- **Fokus & Lingkup**: Registri kapabilitas multi-dimensi (5D truth model), penegakan kontrak perkakas/MCP, orkestrasi control-plane, dan validasi runtime tools.
+- **Fokus & Lingkup**: Registri kapabilitas multi-dimensi, penegakan kontrak perkakas/MCP, orkestrasi control-plane, dan validasi runtime tools.
 
 ### AS5 — Lentera Pudar Integration & Production Lifecycle
 - **Status Baseline**: `NOT_STARTED`
@@ -111,7 +111,7 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 
 ### H1 — Unreal Pipeline Readiness Audit
 - **Status Baseline**: `NOT_STARTED` (Terblokir hingga AS8 diterima secara eksternal dan status proyek kanonikal secara terpisah membuka H1)
-- **Fokus & Lingkup**: Audit kesiapan fisik pipeline Unreal Engine 5, verifikasi runtime engine, inspeksi arsitektur teknis C++/GAS, dan evaluasi kesiapan interchange aset dari DCC Blender.
+- **Fokus & Lingkup**: Audit kesiapan fisik pipeline Unreal Engine 5, verifikasi runtime/installation/project state, audit arsitektur teknis Unreal yang tersedia atau diusulkan berdasarkan evidence pada saat H1, serta evaluasi kesiapan pipeline aset/DCC berdasarkan evidence yang diamati selama H1.
 
 ---
 

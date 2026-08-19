@@ -4,7 +4,7 @@ type: GOVERNANCE
 authority_scope: navigation.master_index
 canonical: true
 owner: governance-team
-last_reviewed: 2026-08-18
+last_reviewed: 2026-08-19
 ---
 
 # Master Index — Lentera Pudar Master Reference
