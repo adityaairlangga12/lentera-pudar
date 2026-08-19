@@ -191,7 +191,7 @@ Aset skill lokal tetap menjadi spesifikasi lokal proyek Lentera Pudar hingga dim
 
 Program AS menjalankan migrasi berpagar tanpa perubahan destruktif (*no big-bang migration*):
 
-1. **AS1**: Menetapkan arsitektur semantik dan batas kepemilikan repositori (fase aktif saat ini);
+1. **AS1**: Menetapkan arsitektur semantik dan batas kepemilikan repositori;
 2. **AS2**: Menginisialisasi repositori Studio OS dan paket fondasi kontrak setelah persetujuan Project Owner;
 3. **AS3**: Merefundasi implementasi Provider, Profile, Skill, dan Runtime pada Studio OS;
 4. **AS4**: Mengimplementasikan registri kapabilitas dan integrasi control-plane;
@@ -210,8 +210,8 @@ Keputusan berikut secara eksplisit **DITUNDA** ke fase berikutnya:
 - Daftar konkret provider AI dan implementasi adapternya (AS3);
 - Desain model dan dimensi final registri kapabilitas (AS4);
 - Format pertukaran data (*interchange*) Blender → Unreal (H1);
-- Arsitektur teknis C++/Blueprint/GAS Unreal Engine (H1/Domain 05);
-- Implementasi fungsionalitas multi-game generic (Pasca-AS program).
+- Arsitektur teknis Unreal Engine berdasarkan evidence yang tersedia atau diusulkan pada saat H1 (H1/Domain 05);
+- Fungsionalitas multi-game / 2D / portfolio tetap FUTURE dan hanya dapat diaktifkan melalui evidence kebutuhan serta governance dan Project Owner authorization yang berlaku.
 
 ---
 
