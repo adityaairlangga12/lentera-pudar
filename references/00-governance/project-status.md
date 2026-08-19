@@ -31,9 +31,21 @@ last_reviewed: 2026-08-19
   - R7 Fresh `lentera-pudar` Repository Genesis: `ACCEPTED`; fresh repository genesis was independently verified through the accepted R8 migration-verification gate.
   - R8 Migration Verification & Legacy Repository Retirement Gate: `ACCEPTED`; fresh repository identity, history, manifest, governance, backup, and legacy recoverability were independently verified.
   - Legacy repository preservation: `adityaairlangga12/lentera-pudar-legacy-pre-r7` remains preserved; retirement, archive, or deletion has `NOT BEEN AUTHORIZED` and still requires separate explicit Project Owner approval.
-  - H1 Unreal Pipeline Readiness Audit: `NOT_STARTED`; `NEXT` substantive gate.
   - R4-C does not constitute execution or acceptance of R5–R8.
+- **AI Game Dev Studio Refoundation (AS) Program Status**:
+  - AS0 — Current Architecture Audit: `ACCEPTED` (read-only audit and target-design closure; does not imply Studio OS implementation).
+  - AS-G0 — Governance Activation: `IMPLEMENTED / PENDING EXTERNAL REVIEW` (canonical AS roadmap and phase boundaries recorded in [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md)).
+  - AS1 — Studio Semantic Architecture & Repository Boundary: `NOT_STARTED` (blocked until AS-G0 is externally accepted).
+  - AS2 — Studio OS Genesis, Contracts & Extension Foundation: `NOT_STARTED`.
+  - AS3 — Provider, Profile, Skill & Runtime Refoundation: `NOT_STARTED`.
+  - AS4 — Capability Registry & Control-Plane Integration: `NOT_STARTED`.
+  - AS5 — Lentera Pudar Integration & Production Lifecycle: `NOT_STARTED`.
+  - AS6 — Reliability, Security, Recovery & Commercial Hardening: `NOT_STARTED`.
+  - AS7 — Cross-Repository & Cross-Domain Consistency Audit: `NOT_STARTED`.
+  - AS8 — Independent Studio Architecture Verification: `NOT_STARTED`.
+  - H1 — Unreal Pipeline Readiness Audit: `NOT_STARTED` (blocked until AS8 is externally accepted and canonical project status separately opens H1).
 - **Blocker Registry**:
+  - H1 must not begin before AS8 is externally accepted and canonical project status separately opens H1.
   - H1 cannot verify Unreal runtime architecture until an Unreal project and selected engine version are available for inspection.
   - Blender MCP screenshot verification is open; it blocks use of that tool as verified visual evidence but does not invalidate the completed R4 documentation refoundation.
   - Optional shell safety hook is `NOT_EXECUTED` on the R4 audit host because `bash` is unavailable; client activation remains `UNKNOWN`.
