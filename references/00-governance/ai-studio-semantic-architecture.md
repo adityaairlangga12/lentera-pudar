@@ -58,6 +58,13 @@ Arsitektur Studio mendefinisikan 10 entitas semantik inti secara terpisah:
 - **Definisi**: Kemampuan terbukti (*evidence-backed ability*) dari suatu konfigurasi sistem, runtime, atau rantai perkakas untuk menjalankan kelas aksi tertentu di bawah kondisi dan batasan yang dinyatakan.
 - **Karakteristik**: Evaluasi kapabilitas wajib mematuhi alur kebenaran kanonikal:
   $$\text{DOCUMENTED} \neq \text{IMPLEMENTED} \neq \text{AVAILABLE} \neq \text{EXECUTED} \neq \text{VERIFIED} \neq \text{ACCEPTED}$$
+  Serta pemisahan semantik tingkat kapabilitas operasional:
+  $$\text{Technology Adoption} \neq \text{Server Availability} \neq \text{Tool Registration} \neq \text{Handler Implementation} \neq \text{Effective Capability}$$
+  - **Technology Adoption**: Teknologi telah dipilih, disetujui, atau diadopsi untuk digunakan. Hal ini TIDAK membuktikan instalasi fisik, ketersediaan server, registrasi tool, implementasi handler, maupun kapabilitas efektif.
+  - **Server Availability**: Suatu server atau service dapat dijangkau/tersedia secara fisik di lingkungan target yang diobservasi. Hal ini TIDAK membuktikan bahwa tool spesifik terdaftar, handler terimplementasi dengan benar, maupun kapabilitas efektif end-to-end.
+  - **Tool Registration**: Suatu tool atau antarmuka telah diekspos atau didaftarkan pada permukaan eksekusi runtime. Hal ini TIDAK membuktikan implementasi handler (`Tool Registration != Handler Implementation`).
+  - **Handler Implementation**: Kode atau logika eksekusi di balik tool/aksi telah ditulis secara fisik. Hal ini TIDAK membuktikan ketersediaan server, keberhasilan eksekusi, maupun kapabilitas efektif.
+  - **Effective Capability**: Sistem end-to-end benar-benar mampu menjalankan aksi yang didefinisikan di bawah kondisi yang dinyatakan berdasarkan bukti fisik yang relevan. Kapabilitas efektif dilarang disimpulkan hanya dari adopsi, registrasi, implementasi, atau ketersediaan server semata.
 - **Batasan**: `Capability != Tool`. AS1 tidak mendefinisikan model dimensi kebenaran kaku yang baru; perancangan registri kapabilitas detail dialokasikan secara khusus pada Phase AS4.
 
 ### 2.6 Tool
@@ -72,13 +79,13 @@ Arsitektur Studio mendefinisikan 10 entitas semantik inti secara terpisah:
 
 ### 2.8 Artifact
 - **Definisi**: Deliverable atau hasil kerja logis dari proses produksi game atau tata kelola.
-- **Karakteristik**: Invarian mutlak: $\text{Artifact} \neq \text{File}$. Sebuah artefak logis dapat direpresentasikan oleh:
+- **Karakteristik**: Invarian mutlak: $\text{Artifact} \neq \text{File}$ dan $\text{Artifact acceptance} \neq \text{canon acceptance}$. Sebuah artefak logis dapat direpresentasikan oleh:
   - Satu file fisik;
   - Kumpulan beberapa file fisik;
   - Output yang dihasilkan secara dinamis (*generated output*);
   - Struktur state repositori;
   - Output eksternal pipeline produksi.
-- **Batasan**: Penerimaan suatu artefak logis tidak serta-merta mengkanonisasi seluruh file pembantu di sekitarnya.
+- **Batasan**: Penerimaan suatu artefak logis (*artifact acceptance*) tidak otomatis memberikan otoritas kanonikal (*canon acceptance*). Persistensi atau otoritas kanonikal mewajibkan jalur tata kelola yang berlaku, kepemilikan otoritas yang dideklarasikan, dan status repositori kanonikal. Penerimaan artefak juga tidak serta-merta mengkanonisasi seluruh file pembantu di sekitarnya.
 
 ### 2.9 Project
 - **Definisi**: Konteks produksi game spesifik yang mengonsumsi, memanfaatkan, atau mengintegrasikan arsitektur Studio.
@@ -104,9 +111,11 @@ Capability != Tool
 Runtime != Provider
 Production Domain != Role
 Artifact != File
+Artifact acceptance != canon acceptance
 Execution != Verification != Acceptance
 Provider change != architecture change
 Registration != Implementation != Availability != Execution != Verification
+Technology Adoption != Server Availability != Tool Registration != Handler Implementation != Effective Capability
 ```
 
 Prinsip-prinsip di atas adalah invarian struktural dan bukan sekadar contoh opsional.
@@ -115,11 +124,11 @@ Prinsip-prinsip di atas adalah invarian struktural dan bukan sekadar contoh opsi
 
 ## 4. Matriks Batas Kepemilikan Repositori (*Repository Ownership Matrix*)
 
-| Repositori | Status Keberadaan | Lingkup Kepemilikan Otoritatif | Hal yang DILARANG Dimiliki |
+| Repositori | Klasifikasi Batas | Lingkup Kepemilikan Otoritatif | Hal yang DILARANG Dimiliki |
 |---|---|---|---|
-| **`adityaairlangga12/lentera-pudar`** | Aktif / Eksis | - Kanon semesta dan cerita game.<br>- Spesifikasi GDD, Narrative, Gameplay, dan Art 3D.<br>- Tata kelola, status, dan ADR game.<br>- Implementasi gameplay dan aset produksi game.<br>- Work Orders, Traces, Handoffs, dan Passports proyek.<br>- Konfigurasi integrasi spesifik Lentera Pudar.<br>- Aset agen project-local di `.agents/**`. | - Kontrak generic universal Studio OS.<br>- Skema multi-game generic.<br>- Server eksternal Blender MCP. |
-| **Future Studio OS** | **Masa Depan / Belum Dibuat** | - Kontrak semantik generic Studio.<br>- Skema data, registri, dan validator universal.<br>- Abstraksi Role, Provider, Profile, dan Skill generic.<br>- Kontrak kapabilitas dan control-plane generic.<br>- Semantik adapter runtime/provider.<br>- Kerangka kerja ekstensi lintas-proyek. | - Aset atau cerita game spesifik Lentera.<br>- File binary produksi Unreal game.<br>- Server eksternal Blender MCP. |
-| **`lentera-blender-mcp`** | Aktif / Terpisah | - Implementasi control-plane Blender.<br>- Tooling dan script internal Blender.<br>- Server JSON-RPC Blender MCP. | - Spesifikasi game Lentera Pudar.<br>- Kontrak generic Studio OS di luar domain Blender. |
+| **`adityaairlangga12/lentera-pudar`** | Primary product / first reference production project | - Kanon semesta dan cerita game.<br>- Spesifikasi GDD, Narrative, Gameplay, dan Art 3D.<br>- Tata kelola, status, dan ADR game.<br>- Implementasi gameplay dan aset produksi game.<br>- Work Orders, Traces, Handoffs, dan Passports proyek.<br>- Konfigurasi integrasi spesifik Lentera Pudar.<br>- Aset agen project-local di `.agents/**`. | - Kontrak generic universal Studio OS.<br>- Skema multi-game generic.<br>- Server eksternal Blender MCP. |
+| **Future Studio OS** | Future generic Studio domain; physical repository creation gated | - Kontrak semantik generic Studio.<br>- Skema data, registri, dan validator universal.<br>- Abstraksi Role, Provider, Profile, dan Skill generic.<br>- Kontrak kapabilitas dan control-plane generic.<br>- Semantik adapter runtime/provider.<br>- Kerangka kerja ekstensi lintas-proyek. | - Aset atau cerita game spesifik Lentera.<br>- File binary produksi Unreal game.<br>- Server eksternal Blender MCP. |
+| **`lentera-blender-mcp`** | Independent tooling repository | - Implementasi control-plane Blender.<br>- Tooling dan script internal Blender.<br>- Server JSON-RPC Blender MCP. | - Spesifikasi game Lentera Pudar.<br>- Kontrak generic Studio OS di luar domain Blender. |
 
 ---
 
@@ -174,8 +183,10 @@ Aset skill lokal tetap menjadi spesifikasi lokal proyek Lentera Pudar hingga dim
 
 ## 8. Batas Repositori Studio OS Masa Depan (*Future Studio OS Boundary*)
 
-- Repositori Studio OS **BELUM DIBUAT** dan tidak dibuat pada Phase AS1.
-- Inisialisasi fisik repositori Studio OS berada di bawah Phase AS2 dan tunduk pada gerbang persetujuan manusia (*Project Owner approval gate*) atas nama repositori, lisensi, dan visibilitas.
+- Phase AS1 menetapkan batas arsitektur semantik dan tidak membuat repositori Studio OS fisik.
+- Keberadaan fisik repositori Studio OS pada fase berikutnya wajib diverifikasi dari bukti fisik repositori dan status proyek kanonikal, bukan dari asumsi dokumen.
+- Inisialisasi fisik repositori Studio OS berada di bawah gerbang fase AS yang berlaku dan memerlukan otorisasi eksplisit dari Project Owner (*explicit Project Owner authorization*).
+- Penetapan nama repositori, visibilitas (*public/private*), lisensi (*licensing*), dan strategi publikasi merupakan gerbang persetujuan manusia (*human approval gates*) yang diatur secara terpisah.
 
 ---
 
