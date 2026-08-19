@@ -32,6 +32,7 @@ last_reviewed: 2026-08-18
 | **Navigasi & Tata Kelola Dokumen** | [master-index.md](master-index.md) | `navigation.master_index` | Peta navigasi global, SSoT governance, dan routing agen. |
 | **Status Kebenaran Proyek** | [project-status.md](project-status.md) | `project.status` | Pelaporan fase proyek, status engine/tooling riil, dan blocker. |
 | **Genesis Repository & Verifikasi Migrasi** | [repository-genesis-plan.md](repository-genesis-plan.md) | `repository.genesis` | Manifest, gate keselamatan, eksekusi R7, dan verifikasi independen R8. |
+| **AI Studio Refoundation Program** | [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md) | `program.ai_studio_refoundation` | Roadmap kanonikal program AS, batas fase, dependensi H1, dan guardrails tata kelola. |
 | **Identitas & Filosofi Game** | [game-design-document.md](../01-core/game-design-document.md) | `project.identity` | Master GDD 9 Bab, arsitektur dual-layer Kena/Hellblade, premis duka. |
 | **Visi Kreatif & Semiotika Seni** | [creative-vision.md](../01-core/creative-vision.md) | `creative.vision` | Filosofi seni The Triad (2700K vs 6500K), diksi puitis, resonansi duka. |
 | **Progresi Kemampuan Hero** | [sector-ability-progression.md](../02-gameplay/sector-ability-progression.md) | `gameplay.progression` | Progresi sekuensial GRIS model, 5 kemampuan hero, Altar Duka 1–5. |
@@ -123,9 +124,10 @@ flowchart TD
 | [master-index.md](master-index.md) | Indeks Master Peta Navigasi & Tata Kelola Otoritas SSoT | Pintu masuk awal navigasi seluruh semesta dokumentasi proyek. |
 | [project-status.md](project-status.md) | Status Kebenaran Proyek, Engine/Tooling Status, dan Blocker Registry | Memeriksa fase proyek riil dan status kesiapan implementasi. |
 | [repository-genesis-plan.md](repository-genesis-plan.md) | Rencana kanonikal fresh repository genesis, backup/rollback boundary, manifest, dan settings target | Otoritas eksekusi wajib untuk R7 dan checklist verifikasi wajib untuk R8. |
+| [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md) | Roadmap kanonikal AI Game Dev Studio Architecture Refoundation (AS0–AS8), batas fase, dependensi H1, dan guardrails program | Merencanakan atau mengevaluasi fase refoundation arsitektur AI Studio pasca-R8. |
 | [adr/](adr/) | Direktori Rekam Jejak Keputusan Arsitektur Resmi (*ADR Register*) | Meninjau keputusan arsitektural struktural yang telah disahkan. |
 
-R7 dan R8 wajib memuat [repository-genesis-plan.md](repository-genesis-plan.md) sebagai otoritas eksekusi dan verifikasi. Perubahan terhadap manifest, transformasi, stop condition, atau retirement boundary memerlukan governance review terpisah.
+R7 dan R8 wajib memuat [repository-genesis-plan.md](repository-genesis-plan.md) sebagai otoritas eksekusi dan verifikasi. Perencanaan dan perutean fase program AI Game Dev Studio Architecture Refoundation (AS0 s.d. AS8) serta penundaan Phase H1 dirutekan secara kanonikal melalui [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md). Perubahan terhadap manifest, transformasi, stop condition, atau retirement boundary memerlukan governance review terpisah.
 
 ---
 
