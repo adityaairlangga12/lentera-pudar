@@ -78,11 +78,11 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 - **Fokus & Lingkup**: Aktivasi tata kelola kanonikal program AS di dalam repository Lentera Pudar, pencatatan urutan fase dan batas lingkup dalam dokumen ini, perutean tata kelola pasca-R8 pada [master-index.md](master-index.md), sinkronisasi [project-status.md](project-status.md), serta penundaan Phase H1 hingga AS8 diterima secara eksternal.
 
 ### AS1 — Studio Semantic Architecture & Repository Boundary
-- **Status Baseline**: `IMPLEMENTED / PENDING EXTERNAL REVIEW`
+- **Status Baseline**: `ACCEPTED`
 - **Fokus & Lingkup**: Perumusan formal arsitektur semantik Studio OS, batas modularitas, spesifikasi kontrak data/skema, arsitektur isolasi multi-repository, dan penyusunan spesifikasi teknis pada [ai-studio-semantic-architecture.md](ai-studio-semantic-architecture.md) serta [ADR-042](adr/ADR-042-studio-semantic-and-repository-boundary.md) sebelum inisialisasi kode.
 
 ### AS2 — Studio OS Genesis, Contracts & Extension Foundation
-- **Status Baseline**: `NOT_STARTED` (Terblokir hingga AS1 diterima secara eksternal)
+- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS1)
 - **Fokus & Lingkup**: Inisialisasi repository mandiri Studio OS yang terisolasi, pembuatan paket fondasi kontrak, antarmuka ekstensi (*extension foundation*), dan struktur proyek inti berdasar persetujuan manusia atas nama dan lisensi repository.
 
 ### AS3 — Provider, Profile, Skill & Runtime Refoundation
