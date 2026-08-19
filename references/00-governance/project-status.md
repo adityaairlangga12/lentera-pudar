@@ -34,8 +34,8 @@ last_reviewed: 2026-08-19
   - R4-C does not constitute execution or acceptance of R5–R8.
 - **AI Game Dev Studio Refoundation (AS) Program Status**:
   - AS0 — Current Architecture Audit: `ACCEPTED` (read-only audit and target-design closure; does not imply Studio OS implementation).
-  - AS-G0 — Governance Activation: `IMPLEMENTED / PENDING EXTERNAL REVIEW` (canonical AS roadmap and phase boundaries recorded in [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md)).
-  - AS1 — Studio Semantic Architecture & Repository Boundary: `NOT_STARTED` (blocked until AS-G0 is externally accepted).
+  - AS-G0 — Governance Activation: `ACCEPTED` (canonical AS roadmap, phase boundaries, and H1 deferral recorded in [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md); independently reviewed, merged, and post-merge verified).
+  - AS1 — Studio Semantic Architecture & Repository Boundary: `NOT_STARTED`; `NEXT` governance gate.
   - AS2 — Studio OS Genesis, Contracts & Extension Foundation: `NOT_STARTED`.
   - AS3 — Provider, Profile, Skill & Runtime Refoundation: `NOT_STARTED`.
   - AS4 — Capability Registry & Control-Plane Integration: `NOT_STARTED`.

@@ -74,11 +74,11 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 - **Fokus & Lingkup**: Audit menyeluruh *read-only* atas baseline arsitektur repository saat ini, tata kelola refoundation R1–R8, kesiapan rantai perkakas MCP/DCC, serta penutupan arah desain target V3.1. Penerimaan AS0 adalah penutupan fase audit dan tidak mengimplikasikan bahwa Studio OS telah diimplementasikan.
 
 ### AS-G0 — Governance Activation
-- **Status Baseline**: `IMPLEMENTED / PENDING EXTERNAL REVIEW`
+- **Status Baseline**: `ACCEPTED`
 - **Fokus & Lingkup**: Aktivasi tata kelola kanonikal program AS di dalam repository Lentera Pudar, pencatatan urutan fase dan batas lingkup dalam dokumen ini, perutean tata kelola pasca-R8 pada [master-index.md](master-index.md), sinkronisasi [project-status.md](project-status.md), serta penundaan Phase H1 hingga AS8 diterima secara eksternal.
 
 ### AS1 — Studio Semantic Architecture & Repository Boundary
-- **Status Baseline**: `NOT_STARTED` (Terblokir hingga AS-G0 diterima secara eksternal)
+- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS-G0)
 - **Fokus & Lingkup**: Perumusan formal arsitektur semantik Studio OS, batas modularitas, spesifikasi kontrak data/skema, arsitektur isolasi multi-repository, dan penyusunan spesifikasi teknis sebelum inisialisasi kode.
 
 ### AS2 — Studio OS Genesis, Contracts & Extension Foundation
