@@ -4,7 +4,7 @@ type: GOVERNANCE
 authority_scope: project.status
 canonical: true
 owner: governance-team
-last_reviewed: 2026-08-19
+last_reviewed: 2026-08-20
 ---
 
 # Project Status — Lentera Pudar
@@ -36,8 +36,8 @@ last_reviewed: 2026-08-19
   - AS0 — Current Architecture Audit: `ACCEPTED` (read-only audit and target-design closure; does not imply Studio OS implementation).
   - AS-G0 — Governance Activation: `ACCEPTED` (canonical AS roadmap, phase boundaries, and H1 deferral recorded in [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md); independently reviewed, merged, and post-merge verified).
   - AS1 — Studio Semantic Architecture & Repository Boundary: `ACCEPTED` (canonical semantic entity model, invariants, repository ownership boundaries, and ADR-042 merged and independently verified).
-  - AS2 — Studio OS Genesis, Contracts & Extension Foundation: `NOT_STARTED; NEXT governance gate` (eligible for foundation planning; physical repository creation remains gated by Project Owner authorization).
-  - AS3 — Provider, Profile, Skill & Runtime Refoundation: `NOT_STARTED`.
+  - AS2 — Studio OS Genesis, Contracts & Extension Foundation: `ACCEPTED` (private Studio OS genesis, contract/extension foundation, independent verification, and durable lifecycle-authority boundary completed and externally accepted; AS2 acceptance does not imply AS3 implementation).
+  - AS3 — Provider, Profile, Skill & Runtime Refoundation: `NOT_STARTED; NEXT governance gate` (eligible for bounded AS3 architecture/planning preparation only; implementation remains separately gated by explicit Project Owner authorization).
   - AS4 — Capability Registry & Control-Plane Integration: `NOT_STARTED`.
   - AS5 — Lentera Pudar Integration & Production Lifecycle: `NOT_STARTED`.
   - AS6 — Reliability, Security, Recovery & Commercial Hardening: `NOT_STARTED`.
