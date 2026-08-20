@@ -86,11 +86,11 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 - **Fokus & Lingkup**: Inisialisasi repository mandiri Studio OS yang terisolasi, pembuatan paket fondasi kontrak, antarmuka ekstensi (*extension foundation*), dan struktur proyek inti berdasar persetujuan manusia atas nama dan lisensi repository.
 
 ### AS3 — Provider, Profile, Skill & Runtime Refoundation
-- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS2; eligible for bounded architecture/planning preparation only. AS3 implementation requires separate explicit Project Owner authorization.)
+- **Status Baseline**: `ACCEPTED` (Kontrak semantik Provider/Profile/Skill/Runtime dan fondasi komposisi runtime deterministik telah diimplementasikan, diverifikasi secara independen pada tahap kandidat dan pasca-merge, serta diterima secara eksternal oleh Project Owner; penerimaan AS3 tidak mengotorisasi implementasi AS4.)
 - **Fokus & Lingkup**: Abstraksi layer multi-provider AI, spesifikasi profil agen peran teknis, isolasi runtime eksekusi, dan refoundasi mekanisme integrasi skill lokal.
 
 ### AS4 — Capability Registry & Control-Plane Integration
-- **Status Baseline**: `NOT_STARTED`
+- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS3; eligible for bounded architecture/planning preparation only. AS4 implementation requires separate explicit Project Owner authorization.)
 - **Fokus & Lingkup**: Registri kapabilitas multi-dimensi, penegakan kontrak perkakas/MCP, orkestrasi control-plane, dan validasi runtime tools.
 
 ### AS5 — Lentera Pudar Integration & Production Lifecycle

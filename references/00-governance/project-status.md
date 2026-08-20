@@ -37,8 +37,8 @@ last_reviewed: 2026-08-20
   - AS-G0 — Governance Activation: `ACCEPTED` (canonical AS roadmap, phase boundaries, and H1 deferral recorded in [ai-studio-refoundation-plan.md](ai-studio-refoundation-plan.md); independently reviewed, merged, and post-merge verified).
   - AS1 — Studio Semantic Architecture & Repository Boundary: `ACCEPTED` (canonical semantic entity model, invariants, repository ownership boundaries, and ADR-042 merged and independently verified).
   - AS2 — Studio OS Genesis, Contracts & Extension Foundation: `ACCEPTED` (private Studio OS genesis, contract/extension foundation, independent verification, and durable lifecycle-authority boundary completed and externally accepted; AS2 acceptance does not imply AS3 implementation).
-  - AS3 — Provider, Profile, Skill & Runtime Refoundation: `NOT_STARTED; NEXT governance gate` (eligible for bounded AS3 architecture/planning preparation only; implementation remains separately gated by explicit Project Owner authorization).
-  - AS4 — Capability Registry & Control-Plane Integration: `NOT_STARTED`.
+  - AS3 — Provider, Profile, Skill & Runtime Refoundation: `ACCEPTED` (Studio OS Provider/Profile/Skill/Runtime semantic contracts and deterministic runtime-composition foundation were implemented, independently verified at candidate and post-merge stages, and externally accepted by the Project Owner; AS3 acceptance does not authorize AS4 implementation).
+  - AS4 — Capability Registry & Control-Plane Integration: `NOT_STARTED; NEXT governance gate` (eligible for bounded AS4 architecture/planning preparation only; AS4 implementation remains separately gated by explicit Project Owner authorization).
   - AS5 — Lentera Pudar Integration & Production Lifecycle: `NOT_STARTED`.
   - AS6 — Reliability, Security, Recovery & Commercial Hardening: `NOT_STARTED`.
   - AS7 — Cross-Repository & Cross-Domain Consistency Audit: `NOT_STARTED`.
