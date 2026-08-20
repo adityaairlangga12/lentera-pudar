@@ -4,14 +4,14 @@ type: SPECIFICATION
 authority_scope: architecture.studio_semantics
 canonical: true
 owner: architecture-governance
-governed_by: [ADR-042]
-last_reviewed: 2026-08-19
+governed_by: [ADR-042, ADR-043]
+last_reviewed: 2026-08-20
 ---
 
 # AI Studio Semantic Architecture & Repository Boundary
 
 > **Spesifikasi Arsitektur Semantik Kanonikal (*Canonical Semantic Specification*)**  
-> Dokumen ini adalah otoritas spesifikasi kanonikal (`authority_scope: architecture.studio_semantics`) yang dipayungi oleh [ADR-042](adr/ADR-042-studio-semantic-and-repository-boundary.md). Dokumen ini menetapkan pemisahan entitas semantik studio, invarian tata kelola mutlak, matriks batas kepemilikan repositori, arah dependensi, prinsip stabilitas inti, dan batasan migrasi program AI Game Dev Studio Architecture Refoundation (AS).
+> Dokumen ini adalah otoritas spesifikasi kanonikal (`authority_scope: architecture.studio_semantics`) yang dipayungi oleh [ADR-042](adr/ADR-042-studio-semantic-and-repository-boundary.md) dan [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.md). Dokumen ini menetapkan pemisahan entitas semantik studio, invarian tata kelola mutlak, matriks batas kepemilikan repositori, arah dependensi, arsitektur kapabilitas/control-plane, prinsip stabilitas inti, dan batasan migrasi program AI Game Dev Studio Architecture Refoundation (AS).
 
 ---
 
@@ -65,12 +65,12 @@ Arsitektur Studio mendefinisikan 10 entitas semantik inti secara terpisah:
   - **Tool Registration**: Suatu tool atau antarmuka telah diekspos atau didaftarkan pada permukaan eksekusi runtime. Hal ini TIDAK membuktikan implementasi handler (`Tool Registration != Handler Implementation`).
   - **Handler Implementation**: Kode atau logika eksekusi di balik tool/aksi telah ditulis secara fisik. Hal ini TIDAK membuktikan ketersediaan server, keberhasilan eksekusi, maupun kapabilitas efektif.
   - **Effective Capability**: Sistem end-to-end benar-benar mampu menjalankan aksi yang didefinisikan di bawah kondisi yang dinyatakan berdasarkan bukti fisik yang relevan. Kapabilitas efektif dilarang disimpulkan hanya dari adopsi, registrasi, implementasi, atau ketersediaan server semata.
-- **Batasan**: `Capability != Tool`. AS1 tidak mendefinisikan model dimensi kebenaran kaku yang baru; perancangan registri kapabilitas detail dialokasikan secara khusus pada Phase AS4.
+- **Batasan**: Invarian mutlak: $\text{Capability} \neq \text{Tool}$ dan $\text{Capability Declaration} \neq \text{Operational Evidence}$. Deklarasi kontrak kapabilitas atau registrasi deskriptif tidak dengan sendirinya membuktikan ketersediaan operasional atau keberhasilan eksekusi. Model arsitektur registri dan evaluasi kapabilitas disahkan melalui [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.md), sedangkan implementasi teknis dialokasikan secara berpagar pada gerbang AS4-G1 s.d. AS4-G4.
 
 ### 2.6 Tool
 - **Definisi**: Permukaan antarmuka (*interface surface*) atau operasi callable yang diekspos ke dalam konteks eksekusi tertentu.
 - **Karakteristik**: Perkakas yang dapat dipanggil oleh runtime untuk berinteraksi dengan disk, engine, atau proses eksternal.
-- **Batasan**: Invarian mutlak: $\text{Tool Registration} \neq \text{Handler Implementation} \neq \text{Availability} \neq \text{Execution} \neq \text{Verification}$. Keberadaan tool bukan klaim kapabilitas otomatis.
+- **Batasan**: Invarian mutlak: $\text{Tool Registration} \neq \text{Handler Implementation} \neq \text{Server Availability} \neq \text{Execution} \neq \text{Verification} \neq \text{Effective Capability}$. Deskriptor atau registrasi tool bukan klaim kapabilitas otomatis dan tidak membuktikan bahwa handler siap dieksekusi atau server aktif.
 
 ### 2.7 Runtime
 - **Definisi**: Lingkungan atau konteks eksekusi tempat provider, profile, tools, dan semantik eksekusi beroperasi.
@@ -116,6 +116,9 @@ Execution != Verification != Acceptance
 Provider change != architecture change
 Registration != Implementation != Availability != Execution != Verification
 Technology Adoption != Server Availability != Tool Registration != Handler Implementation != Effective Capability
+Capability Declaration != Operational Evidence
+ControlPlanePlan != Execution
+ExecutionReceipt != Verification
 ```
 
 Prinsip-prinsip di atas adalah invarian struktural dan bukan sekadar contoh opsional.
@@ -151,7 +154,41 @@ Lentera Pudar
 
 ---
 
-## 6. Prinsip Stabilitas Inti & Ekstensibilitas Tepi (*Core Stability & Edge Extensibility*)
+## 6. Arsitektur Kapabilitas & Batas Control-Plane AS4 (*AS4 Capability & Control-Plane Architecture*)
+
+Berdasarkan [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.md), sistem menetapkan arsitektur kapabilitas dan control-plane generic dengan pemisahan peran yang tegas:
+
+### 6.1 Deklarasi Statis vs. Bukti Operasional (*Declaration vs. Evidence*)
+- **Deklarasi Statis**: `CapabilityDescriptor`, `ToolDescriptor`, dan `ControlPlaneDescriptor` mendefinisikan identitas semantik, kontrak antarmuka, relasi, prasyarat, dan metadata tanpa memuat asersi ketersediaan permanen (`available: true`, `verified: true`, `works: true`).
+- **Bukti Operasional**: Observasi operasional yang terikat lingkup lingkungan (*environment-scoped*) dan waktu (*time-bound*) yang mencatat status fisik aktual (adopsi, server, registrasi tool, handler, eksekusi, verifikasi).
+
+### 6.2 Keluarga Registri (*Registry Family*)
+- `CapabilityRegistry`: Registrasi deklaratif dan resolusi eksak untuk `CapabilityDescriptor`.
+- `ToolRegistry`: Registrasi deklaratif dan resolusi eksak untuk `ToolDescriptor`.
+- `ControlPlaneRegistry`: Registrasi deklaratif dan resolusi eksak untuk `ControlPlaneDescriptor`.
+- Invarian: Keberadaan entitas dalam registri murni bersifat deklaratif dan tidak membuktikan ketersediaan operasional (`Registration != Availability != Execution`).
+
+### 6.3 Evaluasi Kapabilitas Fail-Closed (*Capability Assessment*)
+- Evaluator deterministik mengonsumsi deklarasi kapabilitas, perkakas, dan bukti operasional eksplisit untuk menghasilkan `CapabilityAssessment` dengan status ketersediaan: `AVAILABLE`, `UNAVAILABLE`, atau `UNKNOWN`.
+- **Prinsip Fail-Closed**: Ketiadaan bukti operasional atau bukti yang tidak memadai **DILARANG KERAS** menghasilkan status `AVAILABLE`.
+- Asesmen operasional Studio OS mendukung tetapi tidak menggantikan 3 dimensi kebenaran tata kelola proyek ADR-004.
+
+### 6.4 Batas Perencanaan & Orkestrasi Control-Plane (*Planning & Orchestration Boundary*)
+- `RuntimeCompositionPlan` (AS3) yang bersifat deklaratif digabungkan dengan kebutuhan kapabilitas, registri, dan `CapabilityAssessment` untuk menghasilkan `ControlPlanePlan`.
+- Invarian: $\text{ControlPlanePlan} \neq \text{Execution}$. Rencana control-plane murni deklaratif dan wajib *fail closed* bila prasyarat tidak terpenuhi.
+- Aliran orkestrasi:
+  $$\text{ControlPlanePlan} \longrightarrow \text{ControlPlaneOrchestrator} \longrightarrow \text{Injected ControlPlaneAdapter} \longrightarrow \text{ExecutionReceipt}$$
+- Invarian: $\text{ExecutionReceipt} \neq \text{Verification}$. Bukti eksekusi tidak membuktikan verifikasi atau keberterimaan hasil.
+- Inti generic Studio OS dilarang memuat konfigurasi, endpoint, kredensial, atau path spesifik Lentera Pudar, Blender, maupun Unreal.
+
+### 6.5 Batas Kepemilikan Repositori
+- **`adityaairlangga12/ai-game-dev-studio-os`**: Kontrak generic Capability/Tool/ControlPlane, registri, validator, evaluator fail-closed, semantik perencanaan, dan batas orkestrasi generic.
+- **`lentera-blender-mcp`**: Implementasi control-plane mandiri spesifik Blender, tooling Blender, dan server JSON-RPC Blender MCP.
+- **`adityaairlangga12/lentera-pudar`**: Konfigurasi integrasi spesifik proyek Lentera Pudar, penggunaan produksi, bukti operasional, dan tata kelola siklus hidup proyek.
+
+---
+
+## 7. Prinsip Stabilitas Inti & Ekstensibilitas Tepi (*Core Stability & Edge Extensibility*)
 
 - **Prinsip Utama**: **Perluas melalui registrasi dan komposisi sebelum mengubah semantik inti (*Extend by registration/composition before changing core semantics*)**.
 - Inti semantik Studio OS dijaga tetap ramping, kokoh, dan stabil.
@@ -165,7 +202,7 @@ Lentera Pudar
 
 ---
 
-## 7. Klasifikasi Aset `.agents/**` Saat Ini
+## 8. Klasifikasi Aset `.agents/**` Saat Ini
 
 Direktori `.agents/**` pada repositori `lentera-pudar` saat ini diklasifikasikan sebagai:
 
@@ -181,7 +218,7 @@ Aset skill lokal tetap menjadi spesifikasi lokal proyek Lentera Pudar hingga dim
 
 ---
 
-## 8. Batas Repositori Studio OS Masa Depan (*Future Studio OS Boundary*)
+## 9. Batas Repositori Studio OS Masa Depan (*Future Studio OS Boundary*)
 
 - Phase AS1 menetapkan batas arsitektur semantik dan tidak membuat repositori Studio OS fisik.
 - Keberadaan fisik repositori Studio OS pada fase berikutnya wajib diverifikasi dari bukti fisik repositori dan status proyek kanonikal, bukan dari asumsi dokumen.
@@ -190,7 +227,7 @@ Aset skill lokal tetap menjadi spesifikasi lokal proyek Lentera Pudar hingga dim
 
 ---
 
-## 9. Independensi `lentera-blender-mcp`
+## 10. Independensi `lentera-blender-mcp`
 
 - `lentera-blender-mcp` adalah repositori terpisah dan independen untuk control plane Blender.
 - Repositori tersebut **TIDAK** dimiliki oleh `lentera-pudar` dan **TIDAK** diserap ke dalam repositori Studio OS masa depan.
@@ -198,7 +235,7 @@ Aset skill lokal tetap menjadi spesifikasi lokal proyek Lentera Pudar hingga dim
 
 ---
 
-## 10. Urutan Batas Migrasi (*Migration Sequencing Boundary*)
+## 11. Urutan Batas Migrasi (*Migration Sequencing Boundary*)
 
 Program AS menjalankan migrasi berpagar tanpa perubahan destruktif (*no big-bang migration*):
 
@@ -211,7 +248,7 @@ Program AS menjalankan migrasi berpagar tanpa perubahan destruktif (*no big-bang
 
 ---
 
-## 11. Keputusan yang Ditunda (*Deferred Decisions & Non-Goals*)
+## 12. Keputusan yang Ditunda (*Deferred Decisions & Non-Goals*)
 
 Keputusan berikut secara eksplisit **DITUNDA** ke fase berikutnya:
 
@@ -219,14 +256,14 @@ Keputusan berikut secara eksplisit **DITUNDA** ke fase berikutnya:
 - Pemilihan visibilitas (*public/private*) dan lisensi repositori Studio OS (AS2);
 - Pemilihan bahasa pemrograman dan framework implementasi Studio OS (AS2);
 - Daftar konkret provider AI dan implementasi adapternya (AS3);
-- Desain model dan dimensi final registri kapabilitas (AS4);
+- Desain arsitektur registri kapabilitas, evaluasi fail-closed, dan batas control-plane disahkan pada tingkat tata kelola (AS4-A0 / ADR-043); detail pengkodean TypeScript, skema JSON, dan implementasi registri dialokasikan secara berpagar pada gerbang AS4-G1 s.d. AS4-G4;
 - Format pertukaran data (*interchange*) Blender → Unreal (H1);
 - Arsitektur teknis Unreal Engine berdasarkan evidence yang tersedia atau diusulkan pada saat H1 (H1/Domain 05);
 - Fungsionalitas multi-game / 2D / portfolio tetap FUTURE dan hanya dapat diaktifkan melalui evidence kebutuhan serta governance dan Project Owner authorization yang berlaku.
 
 ---
 
-## 12. Implikasi Verifikasi & Keberterimaan (*Verification & Acceptance*)
+## 13. Implikasi Verifikasi & Keberterimaan (*Verification & Acceptance*)
 
 - Setiap klaim keberhasilan fase program AS wajib menyajikan bukti fisik terobservasi (*evidence-driven*).
 - Evaluasi internal oleh pembuat (*maker self-check*) bukan verifikasi independen.
@@ -234,9 +271,10 @@ Keputusan berikut secara eksplisit **DITUNDA** ke fase berikutnya:
 
 ---
 
-## 13. Dokumen Tata Kelola Terkait (*Related Canonical Governance*)
+## 14. Dokumen Tata Kelola Terkait (*Related Canonical Governance*)
 
 - [ADR-042 — Studio Semantic Architecture & Repository Boundary](adr/ADR-042-studio-semantic-and-repository-boundary.md)
+- [ADR-043 — Studio Capability Registry & Control-Plane Architecture](adr/ADR-043-studio-capability-control-plane-architecture.md)
 - [AI Studio Refoundation Plan](ai-studio-refoundation-plan.md)
 - [Master Index](master-index.md)
 - [Project Status](project-status.md)
