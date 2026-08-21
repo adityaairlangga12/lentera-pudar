@@ -90,8 +90,20 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 - **Fokus & Lingkup**: Abstraksi layer multi-provider AI, spesifikasi profil agen peran teknis, isolasi runtime eksekusi, dan refoundasi mekanisme integrasi skill lokal.
 
 ### AS4 — Capability Registry & Control-Plane Integration
-- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS3; eligible for bounded architecture/planning preparation only. AS4 implementation requires separate explicit Project Owner authorization.)
-- **Fokus & Lingkup**: Registri kapabilitas multi-dimensi, penegakan kontrak perkakas/MCP, orkestrasi control-plane, dan validasi runtime tools.
+- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS3; eligible for bounded architecture/planning preparation only. AS4 implementation remains separately gated by explicit Project Owner authorization.)
+- **Fokus & Lingkup**: Registri kapabilitas multi-dimensi, penegakan kontrak perkakas/MCP, orkestrasi control-plane generic, evaluasi kapabilitas fail-closed berbasis bukti, dan validasi runtime tools.
+- **Dekomposisi Gerbang Terbuka & Batas Otorisasi (*Approved Gated Decomposition*)**:
+  - `AS4-A0 — Capability & Control-Plane Architecture Closure`: Penutupan arsitektur tata kelola kanonikal kapabilitas dan control-plane pada [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.md) dan [ai-studio-semantic-architecture.md](ai-studio-semantic-architecture.md). Tidak mengotorisasi maupun memulai implementasi AS4-G1.
+  - `AS4-G1 — Capability / Tool / Control-Plane Contract Foundation`: Fondasi kontrak statis, skema JSON, tipe data, validator, dan pengujian untuk `CapabilityDescriptor`, `ToolDescriptor`, `ControlPlaneDescriptor`, `OperationalEvidence`, dan `CapabilityAssessment`. Tanpa registri, tanpa evaluator, tanpa eksekusi.
+  - `AS4-G2 — Registries & Evidence-Backed Capability Evaluation`: Implementasi `CapabilityRegistry`, `ToolRegistry`, `ControlPlaneRegistry`, dan evaluator `CapabilityAssessment` deterministik berbasis bukti dengan semantik fail-closed. Tanpa dispatch, tanpa jaringan, tanpa integrasi Lentera.
+  - `AS4-G3 — Runtime-Tool Validation & Control-Plane Planning`: Validasi kompatibilitas runtime-tool dan produksi deterministik `ControlPlanePlan`. Tanpa eksekusi.
+  - `AS4-G4 — Generic Control-Plane Orchestration Boundary`: Batas orkestrasi generic dengan adapter terinjeksi (`ControlPlaneAdapter`) dan semantik `ExecutionReceipt`. Tanpa binding spesifik Lentera, Blender, atau Unreal.
+- **Aturan Transisi & Pembatasan Otorisasi**:
+  - Urutan gerbang: `AS4-A0 → AS4-G1 → AS4-G2 → AS4-G3 → AS4-G4`.
+  - Implementasi AS4 tetap berstatus `NOT_STARTED` hingga setiap gerbang implementasi individu memperoleh otorisasi terpisah dan eksplisit dari Project Owner.
+  - Penerimaan AS4-A0 **TIDAK** mengotorisasi atau memulai implementasi AS4-G1.
+  - Penerimaan AS4-G1 **TIDAK** otomatis mengotorisasi AS4-G2, dan pemisahan yang sama berlaku hingga AS4-G4.
+  - Tidak ada perubahan siklus hidup pada AS5–AS8 maupun Phase H1.
 
 ### AS5 — Lentera Pudar Integration & Production Lifecycle
 - **Status Baseline**: `NOT_STARTED`
