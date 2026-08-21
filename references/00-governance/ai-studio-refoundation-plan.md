@@ -4,7 +4,7 @@ type: GOVERNANCE
 authority_scope: program.ai_studio_refoundation
 canonical: true
 owner: governance-team
-last_reviewed: 2026-08-20
+last_reviewed: 2026-08-22
 ---
 
 # AI Game Dev Studio Architecture Refoundation Plan — Lentera Pudar
@@ -90,7 +90,7 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 - **Fokus & Lingkup**: Abstraksi layer multi-provider AI, spesifikasi profil agen peran teknis, isolasi runtime eksekusi, dan refoundasi mekanisme integrasi skill lokal.
 
 ### AS4 — Capability Registry & Control-Plane Integration
-- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS3; eligible for bounded architecture/planning preparation only. AS4 implementation remains separately gated by explicit Project Owner authorization.)
+- **Status Baseline**: `ACCEPTED` (Penutupan arsitektur AS4-A0 serta seluruh gerbang implementasi berpagar AS4-G1 s.d. AS4-G4 telah diselesaikan secara sekuensial; fondasi kontrak capability/tool/control-plane, registri dan evaluasi kapabilitas fail-closed berbasis bukti, validasi runtime-tool dan perencanaan control-plane deterministik, serta batas orkestrasi generic dengan adapter terinjeksi telah diverifikasi secara independen pada tahap kandidat dan pasca-merge serta diterima secara eksternal oleh Project Owner; penerimaan AS4 tidak mengotorisasi implementasi AS5.)
 - **Fokus & Lingkup**: Registri kapabilitas multi-dimensi, penegakan kontrak perkakas/MCP, orkestrasi control-plane generic, evaluasi kapabilitas fail-closed berbasis bukti, dan validasi runtime tools.
 - **Dekomposisi Gerbang Terbuka & Batas Otorisasi (*Approved Gated Decomposition*)**:
   - `AS4-A0 — Capability & Control-Plane Architecture Closure`: Penutupan arsitektur tata kelola kanonikal kapabilitas dan control-plane pada [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.md) dan [ai-studio-semantic-architecture.md](ai-studio-semantic-architecture.md). Tidak mengotorisasi maupun memulai implementasi AS4-G1.
@@ -100,13 +100,12 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
   - `AS4-G4 — Generic Control-Plane Orchestration Boundary`: Batas orkestrasi generic dengan adapter terinjeksi (`ControlPlaneAdapter`) dan semantik `ExecutionReceipt`. Tanpa binding spesifik Lentera, Blender, atau Unreal.
 - **Aturan Transisi & Pembatasan Otorisasi**:
   - Urutan gerbang: `AS4-A0 → AS4-G1 → AS4-G2 → AS4-G3 → AS4-G4`.
-  - Implementasi AS4 tetap berstatus `NOT_STARTED` hingga setiap gerbang implementasi individu memperoleh otorisasi terpisah dan eksplisit dari Project Owner.
-  - Penerimaan AS4-A0 **TIDAK** mengotorisasi atau memulai implementasi AS4-G1.
-  - Penerimaan AS4-G1 **TIDAK** otomatis mengotorisasi AS4-G2, dan pemisahan yang sama berlaku hingga AS4-G4.
-  - Tidak ada perubahan siklus hidup pada AS5–AS8 maupun Phase H1.
+  - Seluruh sekuens gerbang implementasi berpagar AS4-A0 hingga AS4-G4 telah selesai dieksekusi berdasarkan otorisasi terpisah dan eksplisit, diverifikasi secara independen, dan diterima secara eksternal oleh Project Owner.
+  - Penerimaan AS4-A0 **TIDAK** mengotorisasi atau memulai implementasi AS4-G1; penerimaan AS4-G1 **TIDAK** otomatis mengotorisasi AS4-G2, dan pemisahan yang sama berlaku hingga AS4-G4.
+  - Pasca-penutupan AS4, AS5 berstatus `NOT_STARTED` dan menjadi gerbang tata kelola berikutnya (*NEXT governance gate*); AS6–AS8 tetap `NOT_STARTED`; Phase H1 tetap `NOT_STARTED` dan terblokir (*BLOCKED*) hingga AS8 diterima secara eksternal.
 
 ### AS5 — Lentera Pudar Integration & Production Lifecycle
-- **Status Baseline**: `NOT_STARTED`
+- **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS4; eligible for bounded AS5 architecture/planning preparation only. AS5 implementation remains separately gated by explicit Project Owner authorization.)
 - **Fokus & Lingkup**: Integrasi repositori Lentera Pudar dengan control-plane Studio OS, standardisasi siklus hidup aset produksi, dan penegakan gerbang SOP produksi (3D, Audio, Narrative, Gameplay).
 
 ### AS6 — Reliability, Security, Recovery & Commercial Hardening

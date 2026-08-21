@@ -4,7 +4,7 @@ type: GOVERNANCE
 authority_scope: project.status
 canonical: true
 owner: governance-team
-last_reviewed: 2026-08-20
+last_reviewed: 2026-08-22
 ---
 
 # Project Status — Lentera Pudar
@@ -38,8 +38,8 @@ last_reviewed: 2026-08-20
   - AS1 — Studio Semantic Architecture & Repository Boundary: `ACCEPTED` (canonical semantic entity model, invariants, repository ownership boundaries, and ADR-042 merged and independently verified).
   - AS2 — Studio OS Genesis, Contracts & Extension Foundation: `ACCEPTED` (private Studio OS genesis, contract/extension foundation, independent verification, and durable lifecycle-authority boundary completed and externally accepted; AS2 acceptance does not imply AS3 implementation).
   - AS3 — Provider, Profile, Skill & Runtime Refoundation: `ACCEPTED` (Studio OS Provider/Profile/Skill/Runtime semantic contracts and deterministic runtime-composition foundation were implemented, independently verified at candidate and post-merge stages, and externally accepted by the Project Owner; AS3 acceptance does not authorize AS4 implementation).
-  - AS4 — Capability Registry & Control-Plane Integration: `NOT_STARTED; NEXT governance gate` (eligible for bounded AS4 architecture/planning preparation only; AS4 implementation remains separately gated by explicit Project Owner authorization).
-  - AS5 — Lentera Pudar Integration & Production Lifecycle: `NOT_STARTED`.
+  - AS4 — Capability Registry & Control-Plane Integration: `ACCEPTED` (AS4-A0 architecture closure and AS4-G1 through AS4-G4 bounded implementation gates were completed in canonical order; the Studio OS capability/tool/control-plane contract foundation, registries and evidence-backed capability evaluation, deterministic runtime-tool/control-plane planning, and generic injected-adapter orchestration boundary were independently verified at candidate and post-merge stages and externally accepted by the Project Owner; AS4 acceptance does not authorize AS5 implementation).
+  - AS5 — Lentera Pudar Integration & Production Lifecycle: `NOT_STARTED; NEXT governance gate` (eligible for bounded AS5 architecture/planning preparation only; AS5 implementation remains separately gated by explicit Project Owner authorization).
   - AS6 — Reliability, Security, Recovery & Commercial Hardening: `NOT_STARTED`.
   - AS7 — Cross-Repository & Cross-Domain Consistency Audit: `NOT_STARTED`.
   - AS8 — Independent Studio Architecture Verification: `NOT_STARTED`.
