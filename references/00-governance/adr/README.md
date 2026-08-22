@@ -4,7 +4,7 @@ type: GOVERNANCE
 authority_scope: architecture.adr_register
 canonical: true
 owner: architecture-governance
-last_reviewed: 2026-08-19
+last_reviewed: 2026-08-22
 ---
 
 # Architecture Decision Record Register
@@ -33,6 +33,7 @@ Hanya ADR berstatus `ACCEPTED` yang memiliki otoritas keputusan, dan hanya untuk
 | [ADR-004](ADR-004-scope-authority-capability-truth-verification-governance.md) | Scope-Based Authority, Capability Truth & Verification Governance | `ACCEPTED` | `governance.authority_verification` |
 | [ADR-042](ADR-042-studio-semantic-and-repository-boundary.md) | Studio Semantic Architecture & Repository Boundary | `ACCEPTED` | `architecture.studio_semantic_boundary` |
 | [ADR-043](ADR-043-studio-capability-control-plane-architecture.md) | Studio Capability Registry & Control-Plane Architecture | `ACCEPTED` | `architecture.studio_capability_control_plane` |
+| [ADR-044](ADR-044-lentera-studio-integration-production-lifecycle-architecture.md) | Studio Integration & Production Lifecycle Architecture | `ACCEPTED` | `architecture.studio_integration_production_lifecycle` |
 
 > The historical identifier interval strictly greater than `ADR-004` and strictly less than `ADR-042` is reserved from the pre-refoundation lineage and MUST NOT be reused. New post-refoundation allocation resumes at `ADR-042`.
 

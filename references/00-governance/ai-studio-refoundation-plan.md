@@ -107,6 +107,18 @@ Seluruh perencanaan, pengusulan, dan eksekusi dalam program AS wajib mematuhi ke
 ### AS5 — Lentera Pudar Integration & Production Lifecycle
 - **Status Baseline**: `NOT_STARTED` (Gerbang tata kelola berikutnya pasca-penutupan AS4; eligible for bounded AS5 architecture/planning preparation only. AS5 implementation remains separately gated by explicit Project Owner authorization.)
 - **Fokus & Lingkup**: Integrasi repositori Lentera Pudar dengan control-plane Studio OS, standardisasi siklus hidup aset produksi, dan penegakan gerbang SOP produksi (3D, Audio, Narrative, Gameplay).
+- **Dekomposisi Gerbang Terbuka & Batas Otorisasi (*Approved Gated Decomposition*)**:
+  - `AS5-A0 — Lentera–Studio Integration & Production Lifecycle Architecture Closure`: Penutupan arsitektur tata kelola kanonikal pada [ADR-044](adr/ADR-044-lentera-studio-integration-production-lifecycle-architecture.md) dan [ai-studio-semantic-architecture.md](ai-studio-semantic-architecture.md). Tata kelola/kanon saja. Tidak mengotorisasi maupun memulai implementasi AS5-G1.
+  - `AS5-G1 — Studio OS Consumable Private Package Boundary`: Membangun batas pengemasan dan konsumsi paket privat Studio OS yang aman (`adityaairlangga12/ai-game-dev-studio-os`). Tanpa kontrak semantik baru; tanpa logika spesifik Lentera.
+  - `AS5-G2 — Generic Project / ProductionDomain / Artifact Contract Foundation`: Menambahkan kontrak, skema, dan validator generic `Project`, `ProductionDomain`, dan `Artifact` pada Studio OS (`adityaairlangga12/ai-game-dev-studio-os`). Tanpa ID/konfigurasi Lentera; tanpa eksekusi proyek.
+  - `AS5-G3 — Lentera Project Integration & Production Lifecycle Foundation`: Mengimplementasikan deskriptor/konfigurasi proyek, perutean domain, dan fondasi rekam jejak siklus hidup berbasis berkas lokal proyek di `adityaairlangga12/lentera-pudar`. Tanpa eksekusi control-plane eksternal; tanpa dispatch Blender/Unreal.
+  - `AS5-G4 — Lentera Control-Plane Binding & Operational Evidence Bridge`: Mengintegrasikan binding konfigurasi proyek dengan perencanaan/orkestrasi Studio OS dan jembatan bukti operasional eksplisit di `adityaairlangga12/lentera-pudar`. Tanpa Unreal/H1; eksekusi Blender memerlukan bukti operasional dan otorisasi terpisah.
+  - `AS5-G5 — Reference Production Lifecycle Verification & Integration Cutover`: Verifikasi minimal satu siklus hidup proyek referensi representatif dari intent hingga bukti dan verifikasi independen sebelum memensiunkan struktur lama di `adityaairlangga12/lentera-pudar`. Tanpa H1; tanpa klaim kesiapan Unreal; tanpa penghapusan otomatis struktur legacy.
+- **Aturan Transisi & Pembatasan Otorisasi**:
+  - Urutan gerbang: `AS5-A0 → AS5-G1 → AS5-G2 → AS5-G3 → AS5-G4 → AS5-G5`.
+  - Penutupan arsitektur AS5-A0 **TIDAK** mengotorisasi implementasi AS5-G1; penerimaan AS5-G1 **TIDAK** otomatis mengotorisasi AS5-G2, dan pemisahan yang sama berlaku hingga AS5-G5.
+  - Setiap gerbang implementasi memerlukan otorisasi eksplisit terpisah dari Project Owner, Work Order berbatas yang aktif, eksekusi Maker, verifikasi independen Verifier, dan penerimaan Project Owner.
+  - Pasca-penutupan AS5-A0, implementasi AS5 tetap `NOT_STARTED`; AS6–AS8 tetap `NOT_STARTED`; Phase H1 tetap `NOT_STARTED` dan terblokir (*BLOCKED*) hingga AS8 diterima secara eksternal dan project status membukanya secara terpisah.
 
 ### AS6 — Reliability, Security, Recovery & Commercial Hardening
 - **Status Baseline**: `NOT_STARTED`
