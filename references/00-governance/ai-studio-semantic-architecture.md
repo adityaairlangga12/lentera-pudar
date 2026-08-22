@@ -4,14 +4,14 @@ type: SPECIFICATION
 authority_scope: architecture.studio_semantics
 canonical: true
 owner: architecture-governance
-governed_by: [ADR-042, ADR-043]
-last_reviewed: 2026-08-20
+governed_by: [ADR-042, ADR-043, ADR-044]
+last_reviewed: 2026-08-22
 ---
 
 # AI Studio Semantic Architecture & Repository Boundary
 
 > **Spesifikasi Arsitektur Semantik Kanonikal (*Canonical Semantic Specification*)**  
-> Dokumen ini adalah otoritas spesifikasi kanonikal (`authority_scope: architecture.studio_semantics`) yang dipayungi oleh [ADR-042](adr/ADR-042-studio-semantic-and-repository-boundary.md) dan [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.md). Dokumen ini menetapkan pemisahan entitas semantik studio, invarian tata kelola mutlak, matriks batas kepemilikan repositori, arah dependensi, arsitektur kapabilitas/control-plane, prinsip stabilitas inti, dan batasan migrasi program AI Game Dev Studio Architecture Refoundation (AS).
+> Dokumen ini adalah otoritas spesifikasi kanonikal (`authority_scope: architecture.studio_semantics`) yang dipayungi oleh [ADR-042](adr/ADR-042-studio-semantic-and-repository-boundary.md), [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.md), dan [ADR-044](adr/ADR-044-lentera-studio-integration-production-lifecycle-architecture.md). Dokumen ini menetapkan pemisahan entitas semantik studio, invarian tata kelola mutlak, matriks batas kepemilikan repositori, arah dependensi, arsitektur kapabilitas/control-plane, integrasi siklus hidup produksi, prinsip stabilitas inti, dan batasan migrasi program AI Game Dev Studio Architecture Refoundation (AS).
 
 ---
 
@@ -119,6 +119,11 @@ Technology Adoption != Server Availability != Tool Registration != Handler Imple
 Capability Declaration != Operational Evidence
 ControlPlanePlan != Execution
 ExecutionReceipt != Verification
+ExecutionReceipt != OperationalEvidence
+ExecutionReceipt != CapabilityAssessment
+Passport != Artifact
+Passport existence != Artifact acceptance
+Host capability != project capability
 ```
 
 Prinsip-prinsip di atas adalah invarian struktural dan bukan sekadar contoh opsional.
@@ -130,7 +135,7 @@ Prinsip-prinsip di atas adalah invarian struktural dan bukan sekadar contoh opsi
 | Repositori | Klasifikasi Batas | Lingkup Kepemilikan Otoritatif | Hal yang DILARANG Dimiliki |
 |---|---|---|---|
 | **`adityaairlangga12/lentera-pudar`** | Primary product / first reference production project | - Kanon semesta dan cerita game.<br>- Spesifikasi GDD, Narrative, Gameplay, dan Art 3D.<br>- Tata kelola, status, dan ADR game.<br>- Implementasi gameplay dan aset produksi game.<br>- Work Orders, Traces, Handoffs, dan Passports proyek.<br>- Konfigurasi integrasi spesifik Lentera Pudar.<br>- Aset agen project-local di `.agents/**`. | - Kontrak generic universal Studio OS.<br>- Skema multi-game generic.<br>- Server eksternal Blender MCP. |
-| **Future Studio OS** | Future generic Studio domain; physical repository creation gated | - Kontrak semantik generic Studio.<br>- Skema data, registri, dan validator universal.<br>- Abstraksi Role, Provider, Profile, dan Skill generic.<br>- Kontrak kapabilitas dan control-plane generic.<br>- Semantik adapter runtime/provider.<br>- Kerangka kerja ekstensi lintas-proyek. | - Aset atau cerita game spesifik Lentera.<br>- File binary produksi Unreal game.<br>- Server eksternal Blender MCP. |
+| **`adityaairlangga12/ai-game-dev-studio-os`** | Generic Studio OS repository | - Kontrak semantik generic Studio.<br>- Skema data, registri, dan validator universal.<br>- Abstraksi Role, Provider, Profile, dan Skill generic.<br>- Kontrak kapabilitas dan control-plane generic.<br>- Semantik adapter runtime/provider.<br>- Kerangka kerja ekstensi lintas-proyek. | - Aset atau cerita game spesifik Lentera.<br>- File binary produksi Unreal game.<br>- Server eksternal Blender MCP. |
 | **`lentera-blender-mcp`** | Independent tooling repository | - Implementasi control-plane Blender.<br>- Tooling dan script internal Blender.<br>- Server JSON-RPC Blender MCP. | - Spesifikasi game Lentera Pudar.<br>- Kontrak generic Studio OS di luar domain Blender. |
 
 ---
@@ -142,7 +147,7 @@ Aliran ketergantungan konseptual dirancang mengalir secara satu arah:
 ```text
 Studio Semantic Contracts
         ↓
-Future Studio OS Implementation
+Studio OS Generic Implementation
         ↓
 Project Integration / Adapter Layer
         ↓
@@ -188,7 +193,49 @@ Berdasarkan [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.m
 
 ---
 
-## 7. Prinsip Stabilitas Inti & Ekstensibilitas Tepi (*Core Stability & Edge Extensibility*)
+## 7. Arsitektur Integrasi & Siklus Hidup Produksi AS5 (*AS5 Studio Integration & Production Lifecycle Architecture*)
+
+Berdasarkan [ADR-044](adr/ADR-044-lentera-studio-integration-production-lifecycle-architecture.md), sistem menetapkan arsitektur integrasi konsumsi Studio OS oleh Lentera Pudar dan manajemen siklus hidup produksi:
+
+### 7.1 Pemisahan Empat Bidang Konseptual (*Four-Plane Lifecycle Separation*)
+- **A. Declaration / Configuration Plane**: Deskriptor proyek, pemetaan production-domain, deklarasi artefak, dan kebutuhan kapabilitas/runtime.
+- **B. Execution Plane**: `RuntimeCompositionPlan`, `ControlPlanePlan`, `ControlPlaneOrchestrator`, `Injected ControlPlaneAdapter`, dan `ExecutionReceipt`.
+- **C. Evidence / Verification Plane**: Observasi proyek aktual, `OperationalEvidence` eksplisit, verifikasi domain-appropriate (6-DoD, uji log, link-check), dan bukti independen terobservasi.
+- **D. Lifecycle / Acceptance Plane**: Otorisasi Work Order berbatas, state siklus hidup artefak, Trace, Handoff, Passport, penerimaan Project Owner/manusia, dan keputusan stage-gate kanonikal proyek.
+- Invarian mutlak: $\text{ExecutionReceipt} \neq \text{OperationalEvidence} \neq \text{CapabilityAssessment} \neq \text{Verification}$. Hasil eksekusi adapter yang sukses tidak otomatis memajukan status artefak, verifikasi, atau tata kelola proyek.
+
+### 7.2 Persistensi Siklus Hidup Berbasis Berkas Lokal Proyek (*Project-Local File-Backed Persistence*)
+- Rekaman siklus hidup produksi dikelola sebagai berkas lokal proyek yang terlacak versi (*project-local, version-controlled, file-backed lifecycle records*).
+- Menjamin reviewability via pull requests, Git provenance, portabilitas tanpa dependensi basis data eksternal, diffability deterministik, dan kepemilikan penuh di repositori `lentera-pudar`.
+- Invarian: $\text{Artifact} \neq \text{File}$ tetap berlaku; artefak logis dapat terdiri dari satu atau banyak berkas.
+
+### 7.3 Tanggung Jawab Entitas Siklus Hidup (*Lifecycle Entity Responsibilities*)
+- **Work Order**: Kontrak otorisasi eksekusi berbatas yang menetapkan ruang kerja, repositori, jalur yang diizinkan, kriteria penerimaan, dan bukti yang disyaratkan.
+- **Trace**: Rekam jejak eksekusi dan konteks observasi aktual yang terikat pada Work Order; tidak sama dengan verifikasi atau penerimaan.
+- **Handoff**: Rekam transfer tanggung jawab produksi antar-domain yang mensyaratkan bukti dan status artefak hulu yang valid; tidak menciptakan penerimaan hilir otomatis.
+- **Passport**: Ringkasan portabel milik proyek mengenai identitas artefak, provenansi, referensi verifikasi, dan status siklus hidup. $\text{Passport} \neq \text{Artifact}$ dan $\text{Passport existence} \neq \text{Artifact acceptance}$.
+
+### 7.4 Jembatan Bukti & Evaluasi Kapabilitas Fail-Closed (*Evidence Bridge*)
+- `ExecutionReceipt` dapat dirujuk sebagai masukan bukti eksekusi, tetapi dilarang otomatis diubah menjadi status `VERIFIED`, `ACCEPTED`, atau `CapabilityAssessment = AVAILABLE`.
+- Bukti operasional (`OperationalEvidence`) wajib terikat lingkup lingkungan dan waktu; evaluasi kapabilitas wajib fail-closed.
+
+### 7.5 Perutean Domain Produksi (*Production Domain Routing*)
+- Integrasi siklus hidup merutekan ke otoritas domain kanonikal (Domain 01–04) dan QA/SOP (Domain 06).
+- Mendukung domain: 3D Art, Audio, Narrative, Gameplay, QA/QC.
+- Invarian: $\text{Production Domain} \neq \text{Role}$. Verifikasi teknis tidak menggantikan penilaian emosional/kreatif manusia.
+
+### 7.6 Batas Isolasi Blender & Firewall Unreal / H1
+- `lentera-blender-mcp` tetap independen; bukti operasional Blender wajib direakuisisi per sesi lingkungan; tidak ada eksekusi Blender di AS5-A0.
+- Phase H1 dan Unreal Engine tetap terisolasi secara mutlak; tidak ada inisialisasi proyek Unreal, pemilihan format interchange final, atau pembukaan Domain 05 di AS5. H1 terblokir hingga AS8 diterima secara eksternal dan project-status membukanya secara terpisah.
+
+### 7.7 Dekomposisi Gerbang AS5 & Aturan Otorisasi (*AS5 Gated Decomposition*)
+- Urutan gerbang: `AS5-A0 → AS5-G1 → AS5-G2 → AS5-G3 → AS5-G4 → AS5-G5`.
+- Aturan pemisahan otorisasi: Penerimaan AS5-A0 **TIDAK** mengotorisasi implementasi AS5-G1; penerimaan AS5-G1 **TIDAK** mengotorisasi AS5-G2; pemisahan yang sama berlaku hingga AS5-G5.
+- Setiap gerbang implementasi memerlukan otorisasi terpisah Project Owner, Work Order berbatas, eksekusi Maker, verifikasi Verifier independen, dan penerimaan Project Owner.
+
+---
+
+## 8. Prinsip Stabilitas Inti & Ekstensibilitas Tepi (*Core Stability & Edge Extensibility*)
 
 - **Prinsip Utama**: **Perluas melalui registrasi dan komposisi sebelum mengubah semantik inti (*Extend by registration/composition before changing core semantics*)**.
 - Inti semantik Studio OS dijaga tetap ramping, kokoh, dan stabil.
@@ -202,7 +249,7 @@ Berdasarkan [ADR-043](adr/ADR-043-studio-capability-control-plane-architecture.m
 
 ---
 
-## 8. Klasifikasi Aset `.agents/**` Saat Ini
+## 9. Klasifikasi Aset `.agents/**` Saat Ini
 
 Direktori `.agents/**` pada repositori `lentera-pudar` saat ini diklasifikasikan sebagai:
 
@@ -218,52 +265,51 @@ Aset skill lokal tetap menjadi spesifikasi lokal proyek Lentera Pudar hingga dim
 
 ---
 
-## 9. Batas Repositori Studio OS Masa Depan (*Future Studio OS Boundary*)
+## 10. Batas Repositori Studio OS (*Studio OS Repository Boundary*)
 
-- Phase AS1 menetapkan batas arsitektur semantik dan tidak membuat repositori Studio OS fisik.
-- Keberadaan fisik repositori Studio OS pada fase berikutnya wajib diverifikasi dari bukti fisik repositori dan status proyek kanonikal, bukan dari asumsi dokumen.
-- Inisialisasi fisik repositori Studio OS berada di bawah gerbang fase AS yang berlaku dan memerlukan otorisasi eksplisit dari Project Owner (*explicit Project Owner authorization*).
-- Penetapan nama repositori, visibilitas (*public/private*), lisensi (*licensing*), dan strategi publikasi merupakan gerbang persetujuan manusia (*human approval gates*) yang diatur secara terpisah.
+- Repositori Studio OS (`adityaairlangga12/ai-game-dev-studio-os`) adalah repositori terpisah dan mandiri untuk domain generic Studio OS.
+- Pembuatan dan evolusi repositori Studio OS berada di bawah gerbang fase AS yang berlaku dan memerlukan otorisasi eksplisit dari Project Owner (*explicit Project Owner authorization*).
+- Repositori Studio OS tetap berstatus privat; perubahan visibilitas (*public/private*), lisensi (*licensing*), dan strategi publikasi merupakan gerbang persetujuan manusia (*human approval gates*) yang diatur secara terpisah.
 
 ---
 
-## 10. Independensi `lentera-blender-mcp`
+## 11. Independensi `lentera-blender-mcp`
 
 - `lentera-blender-mcp` adalah repositori terpisah dan independen untuk control plane Blender.
-- Repositori tersebut **TIDAK** dimiliki oleh `lentera-pudar` dan **TIDAK** diserap ke dalam repositori Studio OS masa depan.
-- Integrasi antara Studio OS dan `lentera-blender-mcp` di masa depan akan berlangsung melalui kontrak antarmuka dan adapter, tanpa peleburan kepemilikan repositori.
+- Repositori tersebut **TIDAK** dimiliki oleh `lentera-pudar` dan **TIDAK** diserap ke dalam repositori Studio OS.
+- Integrasi antara Studio OS, Lentera Pudar, dan `lentera-blender-mcp` berlangsung melalui kontrak antarmuka dan adapter, tanpa peleburan kepemilikan repositori.
 
 ---
 
-## 11. Urutan Batas Migrasi (*Migration Sequencing Boundary*)
+## 12. Urutan Batas Migrasi (*Migration Sequencing Boundary*)
 
 Program AS menjalankan migrasi berpagar tanpa perubahan destruktif (*no big-bang migration*):
 
-1. **AS1**: Menetapkan arsitektur semantik dan batas kepemilikan repositori;
-2. **AS2**: Menginisialisasi repositori Studio OS dan paket fondasi kontrak setelah persetujuan Project Owner;
-3. **AS3**: Merefundasi implementasi Provider, Profile, Skill, dan Runtime pada Studio OS;
-4. **AS4**: Mengimplementasikan registri kapabilitas dan integrasi control-plane;
-5. **AS5**: Mengintegrasikan repositori Lentera Pudar dengan Studio OS;
-6. **Pasca-AS5**: Struktur lokal lama hanya dipensiunkan/direfaktor setelah jalur pengganti yang terverifikasi telah beroperasi penuh.
+1. **AS1**: Menetapkan arsitektur semantik dan batas kepemilikan repositori (`ACCEPTED`);
+2. **AS2**: Menginisialisasi repositori Studio OS dan paket fondasi kontrak (`ACCEPTED`);
+3. **AS3**: Merefundasi implementasi Provider, Profile, Skill, dan Runtime pada Studio OS (`ACCEPTED`);
+4. **AS4**: Mengimplementasikan registri kapabilitas, validasi runtime-tool, perencanaan control-plane, dan orkestrasi generic (`ACCEPTED`);
+5. **AS5**: Mengintegrasikan repositori Lentera Pudar dengan Studio OS melalui sekuens berpagar: AS5-A0 (penutupan arsitektur) → AS5-G1 (batas paket privat) → AS5-G2 (kontrak generic Project/ProductionDomain/Artifact) → AS5-G3 (fondasi integrasi & siklus hidup Lentera) → AS5-G4 (binding & jembatan bukti operasional) → AS5-G5 (verifikasi siklus hidup produksi referensi & cutover);
+6. **Pasca-AS5**: Struktur lokal lama hanya dipensiunkan/direfaktor setelah jalur pengganti yang terverifikasi telah beroperasi penuh dan diterima secara resmi.
 
 ---
 
-## 12. Keputusan yang Ditunda (*Deferred Decisions & Non-Goals*)
+## 13. Keputusan yang Ditunda (*Deferred Decisions & Non-Goals*)
 
 Keputusan berikut secara eksplisit **DITUNDA** ke fase berikutnya:
 
-- Penetapan nama repositori Studio OS (AS2);
-- Pemilihan visibilitas (*public/private*) dan lisensi repositori Studio OS (AS2);
-- Pemilihan bahasa pemrograman dan framework implementasi Studio OS (AS2);
-- Daftar konkret provider AI dan implementasi adapternya (AS3);
-- Desain arsitektur registri kapabilitas, evaluasi fail-closed, dan batas control-plane disahkan pada tingkat tata kelola (AS4-A0 / ADR-043); detail pengkodean TypeScript, skema JSON, dan implementasi registri dialokasikan secara berpagar pada gerbang AS4-G1 s.d. AS4-G4;
+- Skema fisik detail field-by-field JSON untuk Work Order, Trace, Handoff, dan Passport (dialokasikan pada AS5-G2/AS5-G3);
+- Struktur direktori penyimpanan berkas siklus hidup pada disk (dialokasikan pada AS5-G3);
+- Mekanisme teknis pengemasan privat Studio OS (dialokasikan pada AS5-G1);
+- Detail implementasi adapter control-plane spesifik (dialokasikan pada AS5-G4);
+- Pemilihan arsitektur atau mesin basis data eksternal;
 - Format pertukaran data (*interchange*) Blender → Unreal (H1);
 - Arsitektur teknis Unreal Engine berdasarkan evidence yang tersedia atau diusulkan pada saat H1 (H1/Domain 05);
 - Fungsionalitas multi-game / 2D / portfolio tetap FUTURE dan hanya dapat diaktifkan melalui evidence kebutuhan serta governance dan Project Owner authorization yang berlaku.
 
 ---
 
-## 13. Implikasi Verifikasi & Keberterimaan (*Verification & Acceptance*)
+## 14. Implikasi Verifikasi & Keberterimaan (*Verification & Acceptance*)
 
 - Setiap klaim keberhasilan fase program AS wajib menyajikan bukti fisik terobservasi (*evidence-driven*).
 - Evaluasi internal oleh pembuat (*maker self-check*) bukan verifikasi independen.
@@ -271,10 +317,11 @@ Keputusan berikut secara eksplisit **DITUNDA** ke fase berikutnya:
 
 ---
 
-## 14. Dokumen Tata Kelola Terkait (*Related Canonical Governance*)
+## 15. Dokumen Tata Kelola Terkait (*Related Canonical Governance*)
 
 - [ADR-042 — Studio Semantic Architecture & Repository Boundary](adr/ADR-042-studio-semantic-and-repository-boundary.md)
 - [ADR-043 — Studio Capability Registry & Control-Plane Architecture](adr/ADR-043-studio-capability-control-plane-architecture.md)
+- [ADR-044 — Lentera–Studio Integration & Production Lifecycle Architecture](adr/ADR-044-lentera-studio-integration-production-lifecycle-architecture.md)
 - [AI Studio Refoundation Plan](ai-studio-refoundation-plan.md)
 - [Master Index](master-index.md)
 - [Project Status](project-status.md)
