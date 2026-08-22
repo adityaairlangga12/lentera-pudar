@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lentera-pudar.internal/studio/lifecycle/handoff.schema.json",
+  "title": "Handoff",
+  "description": "Formal transfer record schema between ProductionDomains for Lentera Pudar",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "sourceProductionDomain": {
+      "type": "string",
+      "pattern": "^production-domain\\.[a-z0-9-]+$"
+    },
+    "targetProductionDomain": {
+      "type": "string",
+      "pattern": "^production-domain\\.[a-z0-9-]+$"
+    },
+    "artifactIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "prerequisiteEvidenceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "recordedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "projectId",
+    "sourceProductionDomain",
+    "targetProductionDomain",
+    "artifactIds",
+    "prerequisiteEvidenceRefs",
+    "recordedAt"
+  ],
+  "additionalProperties": false
+}

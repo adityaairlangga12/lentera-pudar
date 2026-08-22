@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lentera-pudar.internal/studio/lifecycle/passport.schema.json",
+  "title": "Passport",
+  "description": "Portable project-local summary schema of logical Artifact lifecycle provenance for Lentera Pudar",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "artifactId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "provenanceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "verificationRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "acceptanceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "artifactLifecycleRecordRef": {
+      "type": "string",
+      "minLength": 1
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "projectId",
+    "artifactId",
+    "provenanceRefs",
+    "verificationRefs",
+    "acceptanceRefs",
+    "artifactLifecycleRecordRef",
+    "timestamp"
+  ],
+  "additionalProperties": false
+}

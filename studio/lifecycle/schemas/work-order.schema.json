@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lentera-pudar.internal/studio/lifecycle/work-order.schema.json",
+  "title": "WorkOrder",
+  "description": "Project-local bounded execution authorization record schema for Lentera Pudar",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "targetRepository": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"
+    },
+    "authorizedWorkspace": {
+      "type": "object",
+      "properties": {
+        "workspaceName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "workspaceName"
+      ],
+      "additionalProperties": false
+    },
+    "allowedPaths": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "forbiddenScope": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "acceptanceCriteria": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "requiredEvidence": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "ownerAuthorization": {
+      "type": "object",
+      "properties": {
+        "authorizedBy": {
+          "type": "string",
+          "minLength": 1
+        },
+        "authorizationDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "authorizedBy",
+        "authorizationDate",
+        "reference"
+      ],
+      "additionalProperties": false
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "projectId",
+    "objective",
+    "targetRepository",
+    "authorizedWorkspace",
+    "allowedPaths",
+    "forbiddenScope",
+    "acceptanceCriteria",
+    "requiredEvidence",
+    "ownerAuthorization",
+    "createdAt"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,209 @@
+{
+  "$schema": "./project-integration.schema.json",
+  "schemaVersion": "1.0.0",
+  "studioOs": {
+    "repository": "adityaairlangga12/ai-game-dev-studio-os",
+    "commit": "c981fe506495fcb124f1080cbe1fc0547fae0032",
+    "packageName": "ai-game-dev-studio-os",
+    "packageVersion": "0.1.0"
+  },
+  "projectDescriptor": {
+    "id": "project.lentera-pudar",
+    "version": "1.0.0",
+    "project": {
+      "kind": "Project",
+      "id": "project.lentera-pudar"
+    },
+    "contract": {
+      "namespace": "studio.contracts.as5",
+      "name": "generic-contracts",
+      "version": "1.0.0"
+    },
+    "metadata": {
+      "label": "Lentera Pudar — The First Spark",
+      "description": "Lentera Pudar first reference production game project descriptor",
+      "category": "game-project",
+      "author": "governance-team",
+      "tags": [
+        "lentera-pudar",
+        "reference-project",
+        "phase-0"
+      ]
+    }
+  },
+  "productionDomains": [
+    {
+      "descriptor": {
+        "id": "production-domain.art-3d",
+        "version": "1.0.0",
+        "productionDomain": {
+          "kind": "ProductionDomain",
+          "id": "production-domain.art-3d"
+        },
+        "contract": {
+          "namespace": "studio.contracts.as5",
+          "name": "generic-contracts",
+          "version": "1.0.0"
+        },
+        "metadata": {
+          "label": "3D Art",
+          "description": "3D visual art, asset pipeline, character biomechanics, facial expressions, and environment modular techniques",
+          "category": "art-3d",
+          "author": "governance-team",
+          "tags": [
+            "art-3d",
+            "assets",
+            "dcc"
+          ]
+        }
+      },
+      "routing": {
+        "domainKey": "art-3d",
+        "targetPath": "references/04-art-3d/",
+        "authorityScope": "art.visual_constants",
+        "description": "Canonical 3D visual art and pipeline reference directory"
+      }
+    },
+    {
+      "descriptor": {
+        "id": "production-domain.audio",
+        "version": "1.0.0",
+        "productionDomain": {
+          "kind": "ProductionDomain",
+          "id": "production-domain.audio"
+        },
+        "contract": {
+          "namespace": "studio.contracts.as5",
+          "name": "generic-contracts",
+          "version": "1.0.0"
+        },
+        "metadata": {
+          "label": "Audio",
+          "description": "Audio pipeline, music, sound design, layer/whisper/SFX workflow",
+          "category": "audio",
+          "author": "governance-team",
+          "tags": [
+            "audio",
+            "sfx",
+            "music",
+            "sop-7"
+          ]
+        }
+      },
+      "routing": {
+        "domainKey": "audio",
+        "targetPath": "references/06-pipeline-qc/sop-workflow.md",
+        "authorityScope": "pipeline.sop",
+        "description": "Canonical audio production workflow under SOP 7 (adding new audio)"
+      }
+    },
+    {
+      "descriptor": {
+        "id": "production-domain.narrative",
+        "version": "1.0.0",
+        "productionDomain": {
+          "kind": "ProductionDomain",
+          "id": "production-domain.narrative"
+        },
+        "contract": {
+          "namespace": "studio.contracts.as5",
+          "name": "generic-contracts",
+          "version": "1.0.0"
+        },
+        "metadata": {
+          "label": "Narrative",
+          "description": "Story, script, dialogue direction, cinematics, and poetic world resonance",
+          "category": "narrative",
+          "author": "governance-team",
+          "tags": [
+            "narrative",
+            "script",
+            "dialogue",
+            "cinematics"
+          ]
+        }
+      },
+      "routing": {
+        "domainKey": "narrative",
+        "targetPath": "references/03-narrative/",
+        "authorityScope": "narrative.script",
+        "description": "Canonical narrative, dialogue, and cinematic script directory"
+      }
+    },
+    {
+      "descriptor": {
+        "id": "production-domain.gameplay",
+        "version": "1.0.0",
+        "productionDomain": {
+          "kind": "ProductionDomain",
+          "id": "production-domain.gameplay"
+        },
+        "contract": {
+          "namespace": "studio.contracts.as5",
+          "name": "generic-contracts",
+          "version": "1.0.0"
+        },
+        "metadata": {
+          "label": "Gameplay",
+          "description": "Gameplay mechanics, ability progression, level design, enemy design, and UI/UX",
+          "category": "gameplay",
+          "author": "governance-team",
+          "tags": [
+            "gameplay",
+            "combat",
+            "progression",
+            "level-design"
+          ]
+        }
+      },
+      "routing": {
+        "domainKey": "gameplay",
+        "targetPath": "references/02-gameplay/",
+        "authorityScope": "gameplay.progression",
+        "description": "Canonical gameplay mechanics, level design, and balancing directory"
+      }
+    },
+    {
+      "descriptor": {
+        "id": "production-domain.qa-qc",
+        "version": "1.0.0",
+        "productionDomain": {
+          "kind": "ProductionDomain",
+          "id": "production-domain.qa-qc"
+        },
+        "contract": {
+          "namespace": "studio.contracts.as5",
+          "name": "generic-contracts",
+          "version": "1.0.0"
+        },
+        "metadata": {
+          "label": "QA/QC",
+          "description": "Quality assurance, quality control framework, Definition of Done, and verification contracts",
+          "category": "qa-qc",
+          "author": "governance-team",
+          "tags": [
+            "qa-qc",
+            "verification",
+            "framework"
+          ]
+        }
+      },
+      "routing": {
+        "domainKey": "qa-qc",
+        "targetPath": "references/06-pipeline-qc/qa-qc-framework.md",
+        "authorityScope": "pipeline.qc",
+        "description": "Canonical QA/QC framework and Definition of Done specification"
+      }
+    }
+  ],
+  "artifactCatalog": [],
+  "lifecycle": {
+    "roots": {
+      "workOrders": "studio/lifecycle/records/work-orders",
+      "traces": "studio/lifecycle/records/traces",
+      "handoffs": "studio/lifecycle/records/handoffs",
+      "passports": "studio/lifecycle/records/passports",
+      "artifactLifecycleRecords": "studio/lifecycle/records/artifacts"
+    }
+  }
+}
