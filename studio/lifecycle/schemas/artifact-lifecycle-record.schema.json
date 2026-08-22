@@ -1,0 +1,122 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lentera-pudar.internal/studio/lifecycle/artifact-lifecycle-record.schema.json",
+  "title": "ArtifactLifecycleRecord",
+  "description": "Project-local lifecycle state record schema for Lentera Pudar production artifacts",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "projectId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "artifactId": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.-]+$"
+    },
+    "state": {
+      "type": "string",
+      "enum": [
+        "DRAFT",
+        "VERIFIED",
+        "ACCEPTED"
+      ]
+    },
+    "verificationRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "acceptanceRefs": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "required": [
+    "id",
+    "projectId",
+    "artifactId",
+    "state",
+    "verificationRefs",
+    "acceptanceRefs",
+    "updatedAt"
+  ],
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "DRAFT"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "acceptanceRefs": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "VERIFIED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verificationRefs": {
+            "minItems": 1
+          },
+          "acceptanceRefs": {
+            "maxItems": 0
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "ACCEPTED"
+          }
+        },
+        "required": [
+          "state"
+        ]
+      },
+      "then": {
+        "properties": {
+          "verificationRefs": {
+            "minItems": 1
+          },
+          "acceptanceRefs": {
+            "minItems": 1
+          }
+        }
+      }
+    }
+  ]
+}

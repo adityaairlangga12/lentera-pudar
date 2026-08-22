@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://schemas.lentera-pudar.internal/studio/project-integration.schema.json",
+  "title": "LenteraProjectIntegration",
+  "description": "Project-local configuration schema for Lentera Pudar Studio OS integration",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "studioOs": {
+      "type": "object",
+      "properties": {
+        "repository": {
+          "type": "string",
+          "const": "adityaairlangga12/ai-game-dev-studio-os"
+        },
+        "commit": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{40}$"
+        },
+        "packageName": {
+          "type": "string",
+          "const": "ai-game-dev-studio-os"
+        },
+        "packageVersion": {
+          "type": "string",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        }
+      },
+      "required": [
+        "repository",
+        "commit",
+        "packageName",
+        "packageVersion"
+      ],
+      "additionalProperties": false
+    },
+    "projectDescriptor": {
+      "$ref": "https://schemas.studio-os.internal/projects/project-descriptor.schema.json"
+    },
+    "productionDomains": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "properties": {
+          "descriptor": {
+            "$ref": "https://schemas.studio-os.internal/production-domains/production-domain-descriptor.schema.json"
+          },
+          "routing": {
+            "type": "object",
+            "properties": {
+              "domainKey": {
+                "type": "string",
+                "enum": [
+                  "art-3d",
+                  "audio",
+                  "narrative",
+                  "gameplay",
+                  "qa-qc"
+                ]
+              },
+              "targetPath": {
+                "type": "string",
+                "pattern": "^references/[^\\s]+$"
+              },
+              "authorityScope": {
+                "type": "string",
+                "minLength": 1
+              },
+              "description": {
+                "type": "string",
+                "minLength": 1
+              }
+            },
+            "required": [
+              "domainKey",
+              "targetPath",
+              "authorityScope",
+              "description"
+            ],
+            "additionalProperties": false
+          }
+        },
+        "required": [
+          "descriptor",
+          "routing"
+        ],
+        "additionalProperties": false
+      },
+      "uniqueItems": true
+    },
+    "artifactCatalog": {
+      "type": "array",
+      "items": {
+        "$ref": "https://schemas.studio-os.internal/artifacts/artifact-descriptor.schema.json"
+      }
+    },
+    "lifecycle": {
+      "type": "object",
+      "properties": {
+        "roots": {
+          "type": "object",
+          "properties": {
+            "workOrders": {
+              "type": "string",
+              "pattern": "^studio/lifecycle/records/[^/]+$"
+            },
+            "traces": {
+              "type": "string",
+              "pattern": "^studio/lifecycle/records/[^/]+$"
+            },
+            "handoffs": {
+              "type": "string",
+              "pattern": "^studio/lifecycle/records/[^/]+$"
+            },
+            "passports": {
+              "type": "string",
+              "pattern": "^studio/lifecycle/records/[^/]+$"
+            },
+            "artifactLifecycleRecords": {
+              "type": "string",
+              "pattern": "^studio/lifecycle/records/[^/]+$"
+            }
+          },
+          "required": [
+            "workOrders",
+            "traces",
+            "handoffs",
+            "passports",
+            "artifactLifecycleRecords"
+          ],
+          "additionalProperties": false
+        }
+      },
+      "required": [
+        "roots"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "schemaVersion",
+    "studioOs",
+    "projectDescriptor",
+    "productionDomains",
+    "artifactCatalog",
+    "lifecycle"
+  ],
+  "additionalProperties": false
+}
